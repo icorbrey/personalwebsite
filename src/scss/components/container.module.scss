@@ -1,0 +1,50 @@
+$breakpoints: (
+	'sm': (
+		'size': 576px,
+		'width': 540px,
+	),
+	'md': (
+		'size': 768px,
+		'width': 720px,
+	),
+	'lg': (
+		'size': 992px,
+		'width': 960px,
+	),
+	'xl': (
+		'size': 1200px,
+		'width': 1140px,
+	)
+);
+
+.outer
+{
+	// Layout
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+
+	// Box Model
+	width: 100%;
+
+	&.fill
+	{
+		// Box Model
+		height: 100%;
+	}
+
+	.inner
+	{
+		// Display
+		flex: 1 1 auto;
+
+		@each $label, $breakpoint in $breakpoints
+		{
+			@media (min-width: map-get($breakpoint, 'size'))
+			{
+				// Box Model
+				width: map-get($breakpoint, 'width');
+			}
+		}
+	}
+}

@@ -1,0 +1,25 @@
+.split
+{
+	display: flex;
+	flex-flow: row nowrap;
+
+	height: 100%;
+	padding: 1rem;
+
+	.left
+	{
+		// Layout
+		position: sticky;
+		flex: 0 0 auto;
+
+		margin-right: 2rem;
+		padding-right: 2rem;
+		border-right: solid 0.125rem #e0e0e0;
+	}
+
+	.right
+	{
+		// Layout
+		flex: 1 1 auto;
+	}
+}
