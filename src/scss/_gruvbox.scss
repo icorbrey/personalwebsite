@@ -1,0 +1,32 @@
+$background : #282828;
+$foreground : #ebdbb2;
+$red        : #cc241d;
+$green      : #98971a;
+$yellow     : #d79921;
+$blue       : #458588;
+$purple     : #b16286;
+$aqua       : #689d6a;
+$gray       : #a89984;
+
+$_gruvbox-colors: (
+	'background' : $background,
+	'foreground' : $foreground,
+	'red'        : $red,
+	'green'      : $green,
+	'yellow'     : $yellow,
+	'blue'       : $blue,
+	'purple'     : $purple,
+	'aqua'       : $aqua,
+	'gray'       : $gray,
+);
+
+@each $name, $color in $_gruvbox-colors
+{
+	.gruvbox-#{$name} {
+		color: $color;
+	}
+
+	.gruvbox-bg-#{$name} {
+		background-color: $color;
+	}
+}

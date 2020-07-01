@@ -1,0 +1,62 @@
+@use 'fonts';
+@use 'reset';
+@use 'gruvbox';
+@use 'imports';
+
+html {
+	@extend .gruvbox-foreground;
+	@extend .gruvbox-bg-background;
+
+	padding: 1.5rem 2rem;
+	font-size: 1.5rem;
+}
+
+a {
+	@extend .gruvbox-blue;
+	
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+#root
+{
+	display: flex;
+	flex-direction: column;
+
+	.terminal
+	{
+		flex: 1 1 auto;
+		cursor: text;
+	}
+}
+.term-text
+{
+	font-family: fonts.$term-font;
+	font-size: 1.5rem;
+
+	&::selection
+	{
+		@extend .gruvbox-background;
+		@extend .gruvbox-bg-foreground;
+	}
+}
+
+.prompt-line
+{
+	display: flex;
+
+	.prompt-input
+	{
+		@extend .gruvbox-bg-background;
+		@extend .term-text;
+	
+		flex: 1 1 auto;
+		margin: 0;
+		padding: 0;
+		border: none;
+		color: gruvbox.$foreground;
+	}
+}
