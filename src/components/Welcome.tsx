@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from './Link'
 import ListLink from './ListLink'
-import { Gruvbox } from './Gruvbox'
 
 export default () => (
 	<>
