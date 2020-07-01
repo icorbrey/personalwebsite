@@ -29,7 +29,9 @@ export default () => (
 		</p>
 		<br />
 		<p>
-			Type <Gruvbox fg='yellow'>help</Gruvbox> to see available commands.
+			Please note that this site is still under construction, and may not be fully<br />
+			functional yet. See <Link alt='icorbrey/personalwebsite on GitHub' link='https://www.github.com/icorbrey/personalwebsite' /> for more<br />
+			details.
 		</p>
 		<br />
 	</>
