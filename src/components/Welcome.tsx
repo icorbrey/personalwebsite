@@ -7,7 +7,7 @@ export default () => (
 	<>
 		<p>
 			Welcome to Isaac Corbrey's website
-			(<Link alt='Isaac Corbrey' link='https://isaaccorbrey.netlify.com' />)
+			(<Link alt='Isaac Corbrey' link='https://www.isaaccorbrey.com' />)
 		</p>
 		<br />
 		<p>
