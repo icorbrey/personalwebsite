@@ -3,7 +3,14 @@
 @use 'gruvbox';
 @use 'imports';
 
-html {
+*::selection
+{
+	@extend .gruvbox-background;
+	@extend .gruvbox-bg-foreground;
+}
+
+html
+{
 	@extend .gruvbox-foreground;
 	@extend .gruvbox-bg-background;
 
@@ -11,12 +18,14 @@ html {
 	font-size: 1.5rem;
 }
 
-a {
+a
+{
 	@extend .gruvbox-blue;
 	
 	text-decoration: none;
 
-	&:hover {
+	&:hover
+	{
 		text-decoration: underline;
 	}
 }
@@ -32,16 +41,11 @@ a {
 		cursor: text;
 	}
 }
+
 .term-text
 {
 	font-family: fonts.$term-font;
 	font-size: 1.5rem;
-
-	&::selection
-	{
-		@extend .gruvbox-background;
-		@extend .gruvbox-bg-foreground;
-	}
 }
 
 .prompt-line

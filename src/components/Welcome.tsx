@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from './Link'
 import ListLink from './ListLink'
+import { Gruvbox } from './Gruvbox'
 
 export default () => (
 	<>
@@ -28,7 +29,7 @@ export default () => (
 		</p>
 		<br />
 		<p>
-			Type <span className='gruvbox-yellow'>help</span> to see available commands.
+			Type <Gruvbox fg='yellow'>help</Gruvbox> to see available commands.
 		</p>
 		<br />
 	</>

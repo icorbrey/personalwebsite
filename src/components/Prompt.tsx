@@ -1,4 +1,5 @@
 import React from 'react'
+import { Gruvbox } from './Gruvbox'
 
 export interface PromptProps
 {
@@ -8,16 +9,11 @@ export interface PromptProps
 
 export default ({ success = true, dir = '~' }: PromptProps) => (
 	<span>
-		<span className={ getSuccessClassName(success) }>
+		<Gruvbox fg={ success ? 'green' : 'red' }>
 			corbrey
-		</span>
+		</Gruvbox>
 		&nbsp;
-		<span className='gruvbox-aqua'>
-			{ dir }
-		</span>
+		<Gruvbox fg='aqua'>{ dir }</Gruvbox>
 		&nbsp;
 	</span>
 )
-
-const getSuccessClassName = (success: boolean) =>
-	`gruvbox-${ success ? 'green' : 'red' }`
