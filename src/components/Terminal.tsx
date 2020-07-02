@@ -1,5 +1,4 @@
 import React, { createRef, useState } from 'react'
-import InputRef from '../types/InputRef'
 import { History, HistoryEntry, HistorySetter } from '../types/History'
 
 import Welcome from './Welcome'
@@ -8,9 +7,9 @@ import TerminalWindow from './TerminalWindow'
 
 export default () =>
 {
-	const [inputRef] = useState(newInputRef())
 	const [success] = useState(true)
 	const [currentDir] = useState('~')
+	const [inputRef] = useState(createRef<HTMLInputElement>())
 	const [history, setHistory] = useState<History>([<Welcome />])
 
 	const addToHistory = useHistory(history, setHistory)
@@ -22,9 +21,6 @@ export default () =>
 		</TerminalWindow>
 	)
 }
-
-const newInputRef = (): InputRef =>
-	createRef<HTMLInputElement>()
 
 const useHistory = (history: History, setHistory: HistorySetter) => (entry: HistoryEntry) =>
 	setHistory([...history, entry])
