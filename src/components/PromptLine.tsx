@@ -1,6 +1,6 @@
 import React, { KeyboardEvent } from 'react'
 import InputRef from '../types/InputRef'
-import { HistoryRecorder } from '../types/History'
+import { DisplayHistoryRecorder } from '../types/History'
 
 import Prompt from './Prompt'
 
@@ -9,10 +9,10 @@ export interface PromptLineProps
 	success?: boolean
 	inputRef: InputRef
 	currentDir?: string
-	addToHistory: HistoryRecorder
+	addToDisplayHistory: DisplayHistoryRecorder
 }
 
-export default ({ success = true, currentDir = '~', inputRef, addToHistory }: PromptLineProps) =>
+export default ({ success = true, currentDir = '~', inputRef, addToDisplayHistory }: PromptLineProps) =>
 {
 	const dir = currentDir
 
@@ -20,7 +20,7 @@ export default ({ success = true, currentDir = '~', inputRef, addToHistory }: Pr
 		dir,
 		success,
 		inputRef,
-		addToHistory,
+		addToDisplayHistory,
 	})
 
 	return (
@@ -40,14 +40,14 @@ interface UseCaptureParams
 	dir: string
 	success: boolean
 	inputRef: InputRef
-	addToHistory: HistoryRecorder
+	addToDisplayHistory: DisplayHistoryRecorder
 }
 
-const useCapture = ({ success, dir, addToHistory, inputRef }: UseCaptureParams) => (event: KeyboardEvent) =>
+const useCapture = ({ success, dir, addToDisplayHistory, inputRef }: UseCaptureParams) => (event: KeyboardEvent) =>
 {
 	if (event.key === 'Enter')
 	{
-		addToHistory(
+		addToDisplayHistory(
 			<span>
 				<Prompt { ...{ success, dir } } />{ inputRef?.current?.value }
 			</span>

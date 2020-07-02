@@ -1,5 +1,5 @@
-import React, { createRef, useState } from 'react'
-import { History, HistoryEntry, HistorySetter } from '../types/History'
+import React, { createRef, useState, ReactNode } from 'react'
+import { DisplayHistory, DisplayHistoryEntry, DisplayHistorySetter } from '../types/History'
 
 import Welcome from './Welcome'
 import PromptLine from './PromptLine'
@@ -10,20 +10,20 @@ export default () =>
 	const [success] = useState(true)
 	const [currentDir] = useState('~')
 	const [inputRef] = useState(createRef<HTMLInputElement>())
-	const [history, setHistory] = useState<History>([<Welcome />])
+	const [displayHistory, setDisplayHistory] = useState<DisplayHistory>([<Welcome />])
 
-	const addToHistory = useHistory(history, setHistory)
+	const addToHistory = useDisplayHistory(displayHistory, setDisplayHistory)
 
 	return (
 		<TerminalWindow { ...{ inputRef } }>
-			{ getEntries(history) }
-			<PromptLine { ...{ success, currentDir, inputRef, addToHistory } } />
+			{ getDisplayEntries(displayHistory) }
+			<PromptLine { ...{ success, currentDir, inputRef, addToDisplayHistory: addToHistory } } />
 		</TerminalWindow>
 	)
 }
 
-const useHistory = (history: History, setHistory: HistorySetter) => (entry: HistoryEntry) =>
-	setHistory([...history, entry])
+const useDisplayHistory = (displayHistory: DisplayHistory, setDisplayHistory: DisplayHistorySetter) => (entry: DisplayHistoryEntry) =>
+	setDisplayHistory([...displayHistory, entry])
 
-const getEntries = (history: History): HistoryEntry =>
+const getDisplayEntries = (history: DisplayHistory): ReactNode[] =>
 	history.map(entry => <>{ entry }<br /></>)
