@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import GruvboxColor from '../types/GruvboxColor'
 
-export interface GruvboxProps
+interface GruvboxProps
 {
 	bg?: GruvboxColor
 	fg?: GruvboxColor

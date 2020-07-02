@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import InputRef from '../types/InputRef'
 
-export interface TerminalWindowProps
+interface TerminalWindowProps
 {
 	children?: ReactNode
 	inputRef: InputRef

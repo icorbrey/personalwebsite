@@ -6,7 +6,7 @@ import { InputHistory, InputHistoryRecorder } from '../types/InputHistory'
 
 import Prompt from './Prompt'
 
-export interface PromptLineProps
+interface PromptLineProps
 {
 	success?: boolean
 	inputRef: InputRef

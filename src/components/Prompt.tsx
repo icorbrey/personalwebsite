@@ -2,7 +2,7 @@ import React from 'react'
 
 import Gruvbox from './Gruvbox'
 
-export interface PromptProps
+interface PromptProps
 {
 	dir: string,
 	success: boolean,
