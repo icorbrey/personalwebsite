@@ -56,4 +56,6 @@ const useCapture = ({ success, dir, addToDisplayHistory, inputRef }: UseCaptureP
 		if (inputRef !== null && inputRef.current !== null)
 			inputRef.current.value = ''
 	}
+
+	window.scrollTo(0, (document.body.scrollHeight || document.documentElement.scrollHeight) + 15)
 }
