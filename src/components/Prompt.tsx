@@ -1,7 +1,8 @@
 import React from 'react'
-import { Gruvbox } from './Gruvbox'
 
-export interface PromptProps
+import Gruvbox from './Gruvbox'
+
+interface PromptProps
 {
 	dir: string,
 	success: boolean,
@@ -13,7 +14,9 @@ export default ({ success, dir }: PromptProps) => (
 			corbrey
 		</Gruvbox>
 		&nbsp;
-		<Gruvbox fg='aqua'>{ dir }</Gruvbox>
+		<Gruvbox fg='aqua'>
+			{ dir }
+		</Gruvbox>
 		&nbsp;
 	</span>
 )

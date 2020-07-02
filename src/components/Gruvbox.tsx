@@ -1,9 +1,7 @@
 import React, { ReactNode } from 'react'
+import GruvboxColor from '../types/GruvboxColor'
 
-export type GruvboxColor = 'background' | 'foreground' | 'red' | 'green'
-	| 'yellow' | 'blue' | 'purple' | 'aqua' | 'gray'
-
-export interface GruvboxProps
+interface GruvboxProps
 {
 	bg?: GruvboxColor
 	fg?: GruvboxColor
@@ -11,11 +9,16 @@ export interface GruvboxProps
 	className?: string
 }
 
-export const Gruvbox = ({ fg, bg, className, children }: GruvboxProps) => (
-	<span className={ getClassNames(fg, bg, className) }>
-		{ children }
-	</span>
-)
+export default ({ fg, bg, className, children }: GruvboxProps) =>
+{
+	const classes = getClassNames(fg, bg, className)
+
+	return (
+		<span className={ classes }>
+			{ children }
+		</span>
+	)
+}
 
 const getClassNames = (fg?: GruvboxColor, bg?: GruvboxColor, className?: string) =>
 	[toForeground(fg), toBackground(bg), className]

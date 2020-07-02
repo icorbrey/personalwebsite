@@ -6,5 +6,8 @@ interface LinkProps
 	link: string
 }
 
-export default ({ link, alt }: LinkProps) =>
-	<a href={ link } title={ alt }>{ link }</a>
+export default ({ link, alt }: LinkProps) => (
+	<a href={ link } title={ alt }>
+		{ link }
+	</a>
+)

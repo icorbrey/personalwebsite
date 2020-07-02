@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Link from './Link'
 import ListLink from './ListLink'
 
@@ -32,7 +33,6 @@ export default () => (
 			functional yet. See <Link alt='icorbrey/personalwebsite on GitHub' link='https://www.github.com/icorbrey/personalwebsite' /> for more<br />
 			details.
 		</p>
-		<br />
 	</>
 )
 
