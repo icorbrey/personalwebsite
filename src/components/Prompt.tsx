@@ -1,5 +1,6 @@
 import React from 'react'
-import { Gruvbox } from './Gruvbox'
+
+import Gruvbox from './Gruvbox'
 
 export interface PromptProps
 {

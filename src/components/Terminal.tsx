@@ -1,4 +1,7 @@
-import React, { createRef, useState, RefObject, ReactNode } from 'react'
+import React, { createRef, useState } from 'react'
+import InputRef from '../types/InputRef'
+import { History, HistoryEntry, HistorySetter } from '../types/History'
+
 import Welcome from './Welcome'
 import PromptLine from './PromptLine'
 import TerminalWindow from './TerminalWindow'
@@ -8,7 +11,7 @@ export default () =>
 	const [inputRef] = useState(newInputRef())
 	const [success] = useState(true)
 	const [currentDir] = useState('~')
-	const [history, setHistory] = useState<ReactNode[]>([])
+	const [history, setHistory] = useState<History>([])
 
 	const addToHistory = useHistory(history, setHistory)
 
@@ -21,11 +24,11 @@ export default () =>
 	)
 }
 
-const newInputRef = (): RefObject<HTMLInputElement> =>
+const newInputRef = (): InputRef =>
 	createRef<HTMLInputElement>()
 
-const useHistory = (history: ReactNode[], setHistory: React.Dispatch<React.SetStateAction<ReactNode[]>>) => (entry: ReactNode) =>
+const useHistory = (history: History, setHistory: HistorySetter) => (entry: HistoryEntry) =>
 	setHistory([...history, entry])
 
-const getEntries = (history: ReactNode[]): ReactNode =>
+const getEntries = (history: History): HistoryEntry =>
 	history.map(entry => <>{ entry }<br /></>)

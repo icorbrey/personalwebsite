@@ -1,8 +1,8 @@
-import React, { KeyboardEvent, RefObject, ReactNode } from 'react'
-import Prompt from './Prompt'
+import React, { KeyboardEvent } from 'react'
+import InputRef from '../types/InputRef'
+import { HistoryRecorder } from '../types/History'
 
-type HistoryRecorder = (entry: ReactNode) => void
-type InputRef = RefObject<HTMLInputElement>
+import Prompt from './Prompt'
 
 export interface PromptLineProps
 {
@@ -14,11 +14,18 @@ export interface PromptLineProps
 
 export default ({ success = true, currentDir = '~', inputRef, addToHistory }: PromptLineProps) =>
 {
-	const captureInput = useCapture(success, currentDir, addToHistory, inputRef)
+	const dir = currentDir
+
+	const captureInput = useCapture({
+		dir,
+		success,
+		inputRef,
+		addToHistory,
+	})
 
 	return (
 		<span className='prompt-line'>
-			<Prompt { ...{ success, dir: currentDir } } />
+			<Prompt { ...{ success, dir } } />
 			<input
 				autoFocus
 				ref={ inputRef }
@@ -28,13 +35,21 @@ export default ({ success = true, currentDir = '~', inputRef, addToHistory }: Pr
 	)
 }
 
-const useCapture = (success: boolean, currentDir: string, addToHistory: HistoryRecorder, inputRef: InputRef) => (event: KeyboardEvent) =>
+interface UseCaptureParams
+{
+	dir: string
+	success: boolean
+	inputRef: InputRef
+	addToHistory: HistoryRecorder
+}
+
+const useCapture = ({ success, dir, addToHistory, inputRef }: UseCaptureParams) => (event: KeyboardEvent) =>
 {
 	if (event.key === 'Enter')
 	{
 		addToHistory(
 			<span>
-				<Prompt { ...{ success, dir: currentDir } } />{ inputRef?.current?.value }
+				<Prompt { ...{ success, dir } } />{ inputRef?.current?.value }
 			</span>
 		)
 

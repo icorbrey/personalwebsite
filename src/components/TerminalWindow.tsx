@@ -1,9 +1,10 @@
-import React, { RefObject, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
+import InputRef from '../types/InputRef'
 
-interface TerminalWindowProps
+export interface TerminalWindowProps
 {
 	children?: ReactNode
-	inputRef: RefObject<HTMLInputElement>
+	inputRef: InputRef
 }
 
 export default ({ inputRef, children }: TerminalWindowProps) => (
@@ -12,5 +13,5 @@ export default ({ inputRef, children }: TerminalWindowProps) => (
 	</pre>
 )
 
-const focusInputIfNotSelected = (ref: RefObject<HTMLInputElement>) => () =>
+const focusInputIfNotSelected = (ref: InputRef) => () =>
 	window?.getSelection()?.toString() || ref?.current?.focus()
