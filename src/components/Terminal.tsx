@@ -11,13 +11,12 @@ export default () =>
 	const [inputRef] = useState(newInputRef())
 	const [success] = useState(true)
 	const [currentDir] = useState('~')
-	const [history, setHistory] = useState<History>([])
+	const [history, setHistory] = useState<History>([<Welcome />])
 
 	const addToHistory = useHistory(history, setHistory)
 
 	return (
 		<TerminalWindow { ...{ inputRef } }>
-			<Welcome />
 			{ getEntries(history) }
 			<PromptLine { ...{ success, currentDir, inputRef, addToHistory } } />
 		</TerminalWindow>
