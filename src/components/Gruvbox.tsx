@@ -9,11 +9,16 @@ interface GruvboxProps
 	className?: string
 }
 
-export default ({ fg, bg, className, children }: GruvboxProps) => (
-	<span className={ getClassNames(fg, bg, className) }>
-		{ children }
-	</span>
-)
+export default ({ fg, bg, className, children }: GruvboxProps) =>
+{
+	const classes = getClassNames(fg, bg, className)
+
+	return (
+		<span className={ classes }>
+			{ children }
+		</span>
+	)
+}
 
 const getClassNames = (fg?: GruvboxColor, bg?: GruvboxColor, className?: string) =>
 	[toForeground(fg), toBackground(bg), className]

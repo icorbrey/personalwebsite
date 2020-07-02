@@ -25,7 +25,7 @@ export default ({ success = true, inputRef, currentDir = '~', inputHistory, addT
 		const listeners: ListenerCollection = {
 			'Enter': () =>
 			{
-				const value = inputRef?.current?.value
+				const value = getInputValue(inputRef)
 				addToDisplayHistory(generatePromptEntry(success, currentDir, value))
 				if (value && doesNotMatchPreviousCommand(value, inputHistory))
 					addToInputHistory(value)
@@ -34,13 +34,13 @@ export default ({ success = true, inputRef, currentDir = '~', inputHistory, addT
 			},
 			'ArrowUp': () =>
 			{
-				const value = Math.min(inputHistoryIndex + 1, inputHistory.length - 1)
+				const value = getPreviousEntry(inputHistoryIndex, inputHistory)
 				setInputHistoryIndex(value)
 				setInputValue(inputRef, inputHistory[value])
 			},
 			'ArrowDown': () =>
 			{
-				const value = Math.max(inputHistoryIndex - 1, -1)
+				const value = getNextEntry(inputHistoryIndex)
 				setInputHistoryIndex(value)
 				setInputValue(inputRef, inputHistory[value])
 			}
@@ -57,7 +57,10 @@ export default ({ success = true, inputRef, currentDir = '~', inputHistory, addT
 
 	return (
 		<span className='prompt-line'>
-			<Prompt { ...{ success, dir: currentDir } } />
+			<Prompt { ...{
+				success,
+				dir: currentDir,
+			} } />
 			<input
 				autoFocus
 				ref={ inputRef }
@@ -67,10 +70,13 @@ export default ({ success = true, inputRef, currentDir = '~', inputHistory, addT
 	)
 }
 
-const scrollToBottom = () => window.scrollTo(0,
-	document.body.scrollHeight
+const scrollToBottom = () => window.scrollTo(0, getScrollHeight())
+
+const getScrollHeight = () => document.body.scrollHeight
 	|| document.documentElement.scrollHeight
-)
+
+const getInputValue = (inputRef: InputRef): string | undefined =>
+	inputRef?.current?.value
 
 const setInputValue = (inputRef: InputRef, value: string | undefined) =>
 {
@@ -87,3 +93,8 @@ const generatePromptEntry = (success: boolean, dir: string, value: string | unde
 const doesNotMatchPreviousCommand = (value: string, inputHistory: InputHistory) =>
 	value !== inputHistory[0]
 
+const getNextEntry = (inputHistoryIndex: number) =>
+	Math.max(inputHistoryIndex - 1, -1)
+
+const getPreviousEntry = (inputHistoryIndex: number, inputHistory: InputHistory) =>
+	Math.min(inputHistoryIndex + 1, inputHistory.length - 1)

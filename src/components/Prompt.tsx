@@ -14,7 +14,9 @@ export default ({ success, dir }: PromptProps) => (
 			corbrey
 		</Gruvbox>
 		&nbsp;
-		<Gruvbox fg='aqua'>{ dir }</Gruvbox>
+		<Gruvbox fg='aqua'>
+			{ dir }
+		</Gruvbox>
 		&nbsp;
 	</span>
 )

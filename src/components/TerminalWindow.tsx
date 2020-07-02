@@ -7,11 +7,19 @@ interface TerminalWindowProps
 	inputRef: InputRef
 }
 
-export default ({ inputRef, children }: TerminalWindowProps) => (
-	<pre className='term-text terminal' onMouseUp={ focusInputIfNotSelected(inputRef) }>
-		{ children }
-	</pre>
-)
+export default ({ inputRef, children }: TerminalWindowProps) =>
+{
+	const onMouseUp = () => isTextSelected() || focusInput(inputRef)
 
-const focusInputIfNotSelected = (ref: InputRef) => () =>
-	window?.getSelection()?.toString() || ref?.current?.focus()
+	return (
+		<pre { ...{
+			onMouseUp,
+			className: 'term-text terminal'
+		} }>
+			{ children }
+		</pre>
+	)
+}
+
+const focusInput = (inputRef: InputRef) => inputRef?.current?.focus()
+const isTextSelected = () => window?.getSelection()?.toString()

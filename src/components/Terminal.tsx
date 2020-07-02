@@ -1,6 +1,6 @@
 import React, { createRef, useState } from 'react'
-import { InputHistory, InputHistoryProvider } from '../types/InputHistory'
-import { DisplayHistory, DisplayHistoryProvider, DisplayHistoryConsumer } from '../types/DisplayHistory'
+import { InputHistory, InputHistoryEntry } from '../types/InputHistory'
+import { DisplayHistory, DisplayHistoryEntry } from '../types/DisplayHistory'
 
 import Welcome from './Welcome'
 import PromptLine from './PromptLine'
@@ -14,12 +14,22 @@ export default () =>
 	const [inputHistory, setInputHistory] = useState<InputHistory>([])
 	const [displayHistory, setDisplayHistory] = useState<DisplayHistory>([<Welcome />])
 
-	const addToInputHistory = useInputHistory(inputHistory, setInputHistory)
-	const addToDisplayHistory = useDisplayHistory(displayHistory, setDisplayHistory)
+	const addToInputHistory = (entry: InputHistoryEntry) =>
+		setInputHistory([entry, ...inputHistory])
+
+	const addToDisplayHistory = (entry: DisplayHistoryEntry) =>
+		setDisplayHistory([...displayHistory, entry])
+
+	const displayEntries = displayHistory.map((entry, key) => (
+		<p { ...{ key } }>
+			{ entry }
+			<br />
+		</p>
+	))
 
 	return (
 		<TerminalWindow { ...{ inputRef } }>
-			{ getDisplayEntries(displayHistory) }
+			{ displayEntries }
 			<PromptLine { ...{
 				success,
 				currentDir,
@@ -31,12 +41,3 @@ export default () =>
 		</TerminalWindow>
 	)
 }
-
-const useInputHistory: InputHistoryProvider = (history, setHistory) => entry =>
-	setHistory([entry, ...history])
-
-const useDisplayHistory: DisplayHistoryProvider = (history, setHistory) => entry =>
-	setHistory([...history, entry])
-
-const getDisplayEntries: DisplayHistoryConsumer = history =>
-	history.map(entry => <>{ entry }<br /></>)
