@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import GruvboxColor from '../types/GruvboxColor'
+import GruvboxColor from 'types/GruvboxColor'
 
 interface GruvboxProps
 {

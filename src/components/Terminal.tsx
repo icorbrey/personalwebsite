@@ -1,12 +1,12 @@
+import InputRef from 'types/InputRef'
 import React, { createRef, useState } from 'react'
-import { InputHistory, InputHistoryEntry } from '../types/InputHistory'
-import { DisplayHistory, DisplayHistoryEntry } from '../types/DisplayHistory'
+import { InputHistory, InputHistoryEntry } from 'types/InputHistory'
+import { DisplayHistory, DisplayHistoryEntry } from 'types/DisplayHistory'
 
-import Prompt from './Prompt'
-import Welcome from './Welcome'
-import PromptLine from './PromptLine'
-import InputRef from '../types/InputRef'
-import TerminalWindow from './TerminalWindow'
+import Prompt from 'components/Prompt'
+import Welcome from 'components/Welcome'
+import PromptLine from 'components/PromptLine'
+import TerminalWindow from 'components/TerminalWindow'
 
 export default () =>
 {

@@ -1,7 +1,6 @@
 import React from 'react'
-
-import Link from './Link'
-import ListLink from './ListLink'
+import Link from 'components/Link'
+import ListLink from 'components/ListLink'
 
 export default () => (
 	<>

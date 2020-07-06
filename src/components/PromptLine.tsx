@@ -1,6 +1,6 @@
 import React, { KeyboardEvent } from 'react'
-import InputRef from '../types/InputRef'
-import Prompt from './Prompt'
+import InputRef from 'types/InputRef'
+import Prompt from 'components/Prompt'
 
 interface PromptLineProps
 {
