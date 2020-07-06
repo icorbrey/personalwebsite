@@ -7,15 +7,18 @@ interface PromptProps
 	success: boolean,
 }
 
-export default ({ success, dir }: PromptProps) => (
-	<span>
-		<Gruvbox fg={ success ? 'green' : 'red' }>
-			corbrey
+export default function Prompt({ success, dir }: PromptProps)
+{
+	return (
+		<span>
+			<Gruvbox fg={ success ? 'green' : 'red' }>
+				corbrey
 		</Gruvbox>
 		&nbsp;
-		<Gruvbox fg='aqua'>
-			{ dir }
-		</Gruvbox>
+			<Gruvbox fg='aqua'>
+				{ dir }
+			</Gruvbox>
 		&nbsp;
-	</span>
-)
+		</span>
+	)
+}

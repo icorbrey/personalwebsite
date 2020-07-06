@@ -8,7 +8,7 @@ import Welcome from 'components/Welcome'
 import PromptLine from 'components/PromptLine'
 import TerminalWindow from 'components/TerminalWindow'
 
-export default () =>
+export default function Terminal()
 {
 	const [success] = useState(true)
 	const [currentDir] = useState('~')

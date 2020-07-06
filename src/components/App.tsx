@@ -1,6 +1,7 @@
 import React from 'react'
 import Terminal from 'components/Terminal'
 
-export default () => (
-	<Terminal />
-)
+export default function App()
+{
+	return <Terminal />
+}

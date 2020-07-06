@@ -9,7 +9,7 @@ interface GruvboxProps
 	className?: string
 }
 
-export default ({ fg, bg, className, children }: GruvboxProps) =>
+export default function Gruvbox({ fg, bg, className, children }: GruvboxProps)
 {
 	const classes = getClassNames(fg, bg, className)
 
