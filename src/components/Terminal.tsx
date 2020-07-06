@@ -5,6 +5,7 @@ import { DisplayHistory, DisplayHistoryEntry } from '../types/DisplayHistory'
 import Welcome from './Welcome'
 import PromptLine from './PromptLine'
 import TerminalWindow from './TerminalWindow'
+import InputRef from '../types/InputRef'
 
 export default () =>
 {
@@ -27,8 +28,11 @@ export default () =>
 		</p>
 	))
 
+	const onTerminalMouseUp = () =>
+		isTextSelected() || focusInputRef(inputRef)
+
 	return (
-		<TerminalWindow { ...{ inputRef } }>
+		<TerminalWindow onMouseUp={ onTerminalMouseUp }>
 			{ displayEntries }
 			<PromptLine { ...{
 				success,
@@ -41,3 +45,9 @@ export default () =>
 		</TerminalWindow>
 	)
 }
+
+const isTextSelected = () =>
+	window?.getSelection()?.toString()
+
+const focusInputRef = (ref: InputRef) =>
+	ref?.current?.focus()
