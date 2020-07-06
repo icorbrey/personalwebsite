@@ -2,18 +2,17 @@ import React, { createRef, useState } from 'react'
 import { InputHistory, InputHistoryEntry } from '../types/InputHistory'
 import { DisplayHistory, DisplayHistoryEntry } from '../types/DisplayHistory'
 
+import Prompt from './Prompt'
 import Welcome from './Welcome'
 import PromptLine from './PromptLine'
-import TerminalWindow from './TerminalWindow'
 import InputRef from '../types/InputRef'
-import Prompt from './Prompt'
-import ListenerCollection from '../types/ListenerCollection'
+import TerminalWindow from './TerminalWindow'
 
 export default () =>
 {
 	const [success] = useState(true)
 	const [currentDir] = useState('~')
-	const [input] = useState(createRef<HTMLInputElement>())
+	const [input] = useState<InputRef>(createRef())
 	const [inputHistoryIndex, setInputHistoryIndex] = useState(-1)
 	const [inputHistory, setInputHistory] = useState<InputHistory>([])
 	const [displayHistory, setDisplayHistory] = useState<DisplayHistory>([<Welcome />])
@@ -45,6 +44,32 @@ export default () =>
 		)
 	}
 
+	const onFocusTerminal = () =>
+		isTextSelected() || focusInput(input)
+
+	const onSubmitCommand = () =>
+	{
+		const text = input?.current?.value
+		addPromptToDisplayHistory(text)
+		addValueToInputHistory(text)
+		setInputValue(input)
+		setInputHistoryIndex(-1)
+	}
+
+	const onSelectPreviousCommand = () =>
+	{
+		const index = offsetInputHistoryIndex(1)
+		setInputHistoryIndex(index)
+		setInputValue(input, inputHistory[index])
+	}
+
+	const onSelectNextCommand = () =>
+	{
+		const index = offsetInputHistoryIndex(-1)
+		setInputHistoryIndex(index)
+		setInputValue(input, inputHistory[index])
+	}
+
 	const displayEntries = displayHistory.map((entry, key) => (
 		<span { ...{ key } }>
 			{ entry }
@@ -52,40 +77,16 @@ export default () =>
 		</span>
 	))
 
-	const onMouseUp = () =>
-		isTextSelected() || focusInput(input)
-
-	const keyDownListeners: ListenerCollection = {
-		'Enter': () =>
-		{
-			const text = input?.current?.value
-			addPromptToDisplayHistory(text)
-			addValueToInputHistory(text)
-			setInputValue(input)
-			setInputHistoryIndex(-1)
-		},
-		'ArrowUp': () =>
-		{
-			const index = offsetInputHistoryIndex(1)
-			setInputHistoryIndex(index)
-			setInputValue(input, inputHistory[index])
-		},
-		'ArrowDown': () =>
-		{
-			const index = offsetInputHistoryIndex(-1)
-			setInputHistoryIndex(index)
-			setInputValue(input, inputHistory[index])
-		}
-	}
-
 	return (
-		<TerminalWindow { ...{ onMouseUp } }>
+		<TerminalWindow { ...{ onFocusTerminal } }>
 			{ displayEntries }
 			<PromptLine { ...{
 				input,
 				success,
 				currentDir,
-				keyDownListeners
+				onSubmitCommand,
+				onSelectNextCommand,
+				onSelectPreviousCommand,
 			} } />
 		</TerminalWindow>
 	)

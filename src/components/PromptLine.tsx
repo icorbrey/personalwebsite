@@ -1,6 +1,5 @@
 import React, { KeyboardEvent } from 'react'
 import InputRef from '../types/InputRef'
-import ListenerCollection from '../types/ListenerCollection'
 import Prompt from './Prompt'
 
 interface PromptLineProps
@@ -8,17 +7,30 @@ interface PromptLineProps
 	input: InputRef
 	success?: boolean
 	currentDir?: string
-	keyDownListeners: ListenerCollection
+	onSubmitCommand: () => void
+	onSelectNextCommand: () => void
+	onSelectPreviousCommand: () => void
 }
 
-export default ({ keyDownListeners, success = true, input, currentDir = '~' }: PromptLineProps) =>
+export default ({ success = true, input: ref, currentDir: dir = '~', onSubmitCommand, onSelectNextCommand, onSelectPreviousCommand }: PromptLineProps) =>
 {
 	const onKeyDown = (event: KeyboardEvent) =>
 	{
-		if (keyDownListeners[event.key])
+		preventDefault(event)
+
+		switch (event.key)
 		{
-			event.preventDefault()
-			keyDownListeners[event.key]()
+			case 'Enter':
+				onSubmitCommand()
+				break
+
+			case 'ArrowUp':
+				onSelectPreviousCommand()
+				break
+
+			case 'ArrowDown':
+				onSelectNextCommand()
+				break
 		}
 
 		scrollToBottom()
@@ -27,12 +39,12 @@ export default ({ keyDownListeners, success = true, input, currentDir = '~' }: P
 	return (
 		<span className='prompt-line'>
 			<Prompt { ...{
+				dir,
 				success,
-				dir: currentDir,
 			} } />
 			<input { ...{
+				ref,
 				onKeyDown,
-				ref: input,
 				autoFocus: true,
 				className: 'prompt-input',
 			} } />
@@ -44,3 +56,15 @@ const scrollToBottom = () => window.scrollTo(0, getScrollHeight())
 
 const getScrollHeight = () => document.body.scrollHeight
 	|| document.documentElement.scrollHeight
+
+const preventDefault = (event: React.KeyboardEvent<Element>) =>
+{
+	switch (event.key)
+	{
+		case 'Enter':
+		case 'ArrowUp':
+		case 'ArrowDown':
+			event.preventDefault()
+	}
+}
+

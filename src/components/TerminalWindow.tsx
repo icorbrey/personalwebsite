@@ -3,10 +3,10 @@ import React, { ReactNode } from 'react'
 interface TerminalWindowProps
 {
 	children?: ReactNode
-	onMouseUp: () => void
+	onFocusTerminal: () => void
 }
 
-export default ({ onMouseUp, children }: TerminalWindowProps) => (
+export default ({ onFocusTerminal: onMouseUp, children }: TerminalWindowProps) => (
 	<pre className='term-text terminal' { ...{ onMouseUp } }>
 		{ children }
 	</pre>
