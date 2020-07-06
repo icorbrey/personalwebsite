@@ -8,7 +8,7 @@ import Welcome from 'components/Welcome'
 import PromptLine from 'components/PromptLine'
 import TerminalWindow from 'components/TerminalWindow'
 
-export default function Terminal()
+export default () =>
 {
 	const [success] = useState(true)
 	const [currentDir] = useState('~')
@@ -105,4 +105,3 @@ const setInputValue = (input: InputRef, value: string | undefined = '') =>
 		input.current.value = value || ''
 	}
 }
-

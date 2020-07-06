@@ -12,14 +12,14 @@ interface PromptLineProps
 	onSelectPreviousCommand: () => void
 }
 
-export default function PromptLine({
+export default ({
 	input: ref,
 	success = true,
 	onSubmitCommand,
 	onSelectNextCommand,
 	currentDir: dir = '~',
 	onSelectPreviousCommand
-}: PromptLineProps)
+}: PromptLineProps) =>
 {
 	const onKeyDown = (event: KeyboardEvent) =>
 	{

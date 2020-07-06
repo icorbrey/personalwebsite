@@ -9,12 +9,12 @@ interface GruvboxProps
 	className?: string
 }
 
-export default function Gruvbox({ fg, bg, className, children }: GruvboxProps)
+export default ({ fg, bg, className: inputClassName, children }: GruvboxProps) =>
 {
-	const classes = getClassNames(fg, bg, className)
+	const className = getClassNames(fg, bg, inputClassName)
 
 	return (
-		<span className={ classes }>
+		<span { ...{ className } }>
 			{ children }
 		</span>
 	)

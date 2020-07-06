@@ -6,11 +6,8 @@ interface TerminalWindowProps
 	onFocusTerminal: () => void
 }
 
-export default function TerminalWindow({ onFocusTerminal: onMouseUp, children }: TerminalWindowProps)
-{
-	return (
-		<pre className='term-text terminal' { ...{ onMouseUp } }>
-			{ children }
-		</pre>
-	)
-}
+export default ({ children, onFocusTerminal: onMouseUp }: TerminalWindowProps) => (
+	<pre className='term-text terminal' { ...{ onMouseUp } }>
+		{ children }
+	</pre>
+)
