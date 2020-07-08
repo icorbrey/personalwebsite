@@ -9,10 +9,12 @@ interface ListLinkProps
 	spaces: number
 }
 
-export default ({ label, alt, link, spaces = 0 }: ListLinkProps) => (
+const ListLink = ({ label, alt, link, spaces = 0 }: ListLinkProps) => (
 	<span>
-		&nbsp;* { label }:{ ' '.repeat(spaces) }
+		&nbsp;* {label }:{' '.repeat(spaces) }
 		<Link { ...{ alt, link } } />
 		<br />
 	</span>
 )
+
+export default ListLink

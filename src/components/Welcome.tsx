@@ -1,8 +1,9 @@
 import React from 'react'
+
 import Link from 'components/Link'
 import ListLink from 'components/ListLink'
 
-export default () => (
+const Welcome = () => (
 	<>
 		<p>
 			Welcome to Isaac Corbrey's website
@@ -29,8 +30,11 @@ export default () => (
 		<br />
 		<p>
 			Please note that this site is still under construction, and may not be fully<br />
-			functional yet. See <Link alt='icorbrey/personalwebsite on GitHub' link='https://www.github.com/icorbrey/personalwebsite' /> for more<br />
+			functional yet.See <Link alt='icorbrey/personalwebsite on GitHub' link='https://www.github.com/icorbrey/personalwebsite' /> for more<br />
 			details.
 		</p>
+		<br />
 	</>
 )
+
+export default Welcome

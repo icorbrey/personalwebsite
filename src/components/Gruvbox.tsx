@@ -9,7 +9,7 @@ interface GruvboxProps
 	className?: string
 }
 
-export default ({ fg, bg, className: inputClassName, children }: GruvboxProps) =>
+const Gruvbox = ({ fg, bg, className: inputClassName, children }: GruvboxProps) =>
 {
 	const className = getClassNames(fg, bg, inputClassName)
 
@@ -30,3 +30,5 @@ const toForeground = (color: GruvboxColor | undefined): string | undefined =>
 
 const toBackground = (color: GruvboxColor | undefined): string | undefined =>
 	color && `gruvbox-bg-${ color }`
+
+export default Gruvbox
