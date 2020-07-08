@@ -1,21 +1,19 @@
-import React, { createContext, ReactNode, useState } from 'react'
-
+import React, { useState } from 'react'
 import InputHistory from 'types/InputHistory'
-import InputContextState from 'data/InputContextState'
+import createContext from 'utils/createContext'
 import InputHistoryEntry from 'types/InputHistoryEntry'
 
-const InputContext = createContext<InputContextState>({
-	addEntry: _ => { },
-	getNextEntry: () => '',
-	getPreviousEntry: () => '',
-})
-
-interface InputContextProviderProps
+interface InputState
 {
-	children?: ReactNode
+	getNextEntry: () => InputHistoryEntry
+	getPreviousEntry: () => InputHistoryEntry
+	addEntry: (entry: InputHistoryEntry) => void
 }
 
-export const InputContextProvider = ({ children }: InputContextProviderProps) =>
+export const [
+	InputContext,
+	InputContextProvider
+] = createContext<InputState>(Context => ({ children }) =>
 {
 	const [index, setIndex] = useState<number>(-1)
 	const [history, setHistory] = useState<InputHistory>([])
@@ -41,14 +39,12 @@ export const InputContextProvider = ({ children }: InputContextProviderProps) =>
 	}
 
 	return (
-		<InputContext.Provider value={ {
+		<Context.Provider value={ {
 			addEntry,
 			getNextEntry,
 			getPreviousEntry
 		} }>
 			{ children }
-		</InputContext.Provider>
+		</Context.Provider>
 	)
-}
-
-export default InputContext
+})

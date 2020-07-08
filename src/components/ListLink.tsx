@@ -1,13 +1,7 @@
 import React from 'react'
-import Link from 'components/Link'
+import { ListLinkProps } from 'types/Props'
 
-interface ListLinkProps
-{
-	alt: string
-	link: string
-	label: string
-	spaces: number
-}
+import Link from 'components/Link'
 
 const ListLink = ({ label, alt, link, spaces = 0 }: ListLinkProps) => (
 	<span>

@@ -1,12 +1,7 @@
 import React from 'react'
+import { PromptProps } from 'types/Props'
 
 import Gruvbox from 'components/Gruvbox'
-
-interface PromptProps
-{
-	dir: string,
-	success: boolean,
-}
 
 const Prompt = ({ success, dir }: PromptProps) => (
 	<span>

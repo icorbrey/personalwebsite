@@ -1,19 +1,18 @@
 import React, { KeyboardEvent, useContext, useState, ChangeEvent } from 'react'
-
 import ListenerCollection from 'types/ListenerCollection'
 
-import InputContext from 'data/InputContext'
-import PromptContext from 'data/PromptContext'
-import DisplayContext from 'data/DisplayContext'
+import { InputContext } from 'data/InputContext'
+import { PromptContext } from 'data/PromptContext'
+import { DisplayContext } from 'data/DisplayContext'
 
 import Prompt from 'components/Prompt'
 import StaticPrompt from 'components/StaticPrompt'
 
 const InteractivePrompt = () =>
 {
-	const { ref } = useContext(PromptContext)
-	const { addEntry: addDisplayEntry } = useContext(DisplayContext)
-	const { addEntry: addInputEntry, getNextEntry, getPreviousEntry } = useContext(InputContext)
+	const input = useContext(InputContext)
+	const prompt = useContext(PromptContext)
+	const display = useContext(DisplayContext)
 
 	const [value, setValue] = useState('')
 
@@ -24,18 +23,18 @@ const InteractivePrompt = () =>
 		const listeners: ListenerCollection = {
 			'Enter': () =>
 			{
-				const value = ref?.current?.value
+				const value = prompt.input?.current?.value
 				if (value)
-					addInputEntry(value)
-				addDisplayEntry(<StaticPrompt { ...{
+					input.addEntry(value)
+				display.addEntry(<StaticPrompt { ...{
 					dir: '~',
 					success: true,
 					value: value || ''
 				} } />)
 				setValue('')
 			},
-			'ArrowUp': () => setValue(getPreviousEntry()),
-			'ArrowDown': () => setValue(getNextEntry()),
+			'ArrowUp': () => setValue(input.getPreviousEntry()),
+			'ArrowDown': () => setValue(input.getNextEntry()),
 		}
 
 		if (listeners[event.key])
@@ -49,11 +48,11 @@ const InteractivePrompt = () =>
 		<span className='prompt-line'>
 			<Prompt dir='~' success={ true } />
 			<input { ...{
-				ref,
 				value,
 				onChange,
 				onKeyDown,
 				autoFocus: true,
+				ref: prompt.input,
 				className: 'prompt-input'
 			} } />
 		</span>

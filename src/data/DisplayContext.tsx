@@ -1,18 +1,21 @@
-import React, { createContext, useState } from 'react'
-
+import createContext from 'utils/createContext'
 import DisplayHistory from 'types/DisplayHistory'
-import DisplayContextState from 'data/DisplayContextState'
+import React, { useState, ReactElement } from 'react'
 import DisplayHistoryEntry from 'types/DisplayHistoryEntry'
 
 import Welcome from 'components/Welcome'
 
-const DisplayContext = createContext<DisplayContextState>({
-	History: () => <> </>,
-	addEntry: _ => { },
-	clearHistory: () => { },
-})
+interface State
+{
+	clearHistory: () => void
+	History: () => ReactElement
+	addEntry: (entry: DisplayHistoryEntry) => void
+}
 
-export const DisplayContextProvider = ({ children }: any) =>
+export const [
+	DisplayContext,
+	DisplayContextProvider
+] = createContext<State>(Context => ({ children }) =>
 {
 	const [history, setHistory] = useState<DisplayHistory>([<Welcome />])
 
@@ -28,14 +31,12 @@ export const DisplayContextProvider = ({ children }: any) =>
 	const clearHistory = () => setHistory([])
 
 	return (
-		<DisplayContext.Provider value={ {
+		<Context.Provider value={ {
 			History,
 			addEntry,
 			clearHistory,
 		} }>
 			{ children }
-		</DisplayContext.Provider>
+		</Context.Provider>
 	)
-}
-
-export default DisplayContext
+})

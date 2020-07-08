@@ -1,13 +1,6 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
+import { GruvboxProps } from 'types/Props'
 import GruvboxColor from 'types/GruvboxColor'
-
-interface GruvboxProps
-{
-	bg?: GruvboxColor
-	fg?: GruvboxColor
-	children?: ReactNode
-	className?: string
-}
 
 const Gruvbox = ({ fg, bg, className: inputClassName, children }: GruvboxProps) =>
 {

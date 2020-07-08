@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 
-import DisplayContext from 'data/DisplayContext'
+import { DisplayContext } from 'data/DisplayContext'
 
 import TerminalWindow from 'components/TerminalWindow'
 import InteractivePrompt from 'components/InteractivePrompt'
 
 const Terminal = () =>
 {
-	const { History } = useContext(DisplayContext)
+	const display = useContext(DisplayContext)
 
 	return (
 		<TerminalWindow>
-			<History />
+			<display.History />
 			<InteractivePrompt />
 		</TerminalWindow>
 	)

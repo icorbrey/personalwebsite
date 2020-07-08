@@ -1,17 +1,13 @@
-import React, { useContext, ReactNode } from 'react'
+import React, { useContext } from 'react'
+import { TerminalWindowProps } from 'types/Props'
 
-import PromptContext from 'data/PromptContext'
-
-interface TerminalWindowProps
-{
-	children?: ReactNode
-}
+import { PromptContext } from 'data/PromptContext'
 
 const TerminalWindow = ({ children }: TerminalWindowProps) =>
 {
-	const { focusPromptInput } = useContext(PromptContext)
+	const prompt = useContext(PromptContext)
 
-	const onMouseUp = () => isTextSelected() || focusPromptInput()
+	const onMouseUp = () => isTextSelected() || prompt.focus()
 
 	return (
 		<pre { ...{

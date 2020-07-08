@@ -1,10 +1,5 @@
 import React from 'react'
-
-interface LinkProps
-{
-	alt: string
-	link: string
-}
+import { LinkProps } from 'types/Props'
 
 const Link = ({ link, alt }: LinkProps) => (
 	<a href={ link } title={ alt }>

@@ -1,32 +1,28 @@
-import React, { createRef, createContext, ReactNode, useState } from 'react'
-
 import InputRef from 'types/InputRef'
-import PromptContextState from 'data/PromptContextState'
+import createContext from 'utils/createContext'
+import React, { createRef, useState } from 'react'
 
-const PromptContext = createContext<PromptContextState>({
-	ref: createRef(),
-	focusPromptInput: () => { }
-})
-
-interface PromptContextProviderProps
+interface PromptState
 {
-	children?: ReactNode
+	input: InputRef
+	focus: () => void
 }
 
-export const PromptContextProvider = ({ children }: PromptContextProviderProps) =>
+export const [
+	PromptContext,
+	PromptContextProvider
+] = createContext<PromptState>(Context => ({ children }) =>
 {
-	const [ref] = useState<InputRef>(createRef())
+	const [input] = useState<InputRef>(createRef())
 
-	const focusPromptInput = () => ref?.current?.focus()
+	const focus = () => input?.current?.focus()
 
 	return (
-		<PromptContext.Provider value={ {
-			ref,
-			focusPromptInput
+		<Context.Provider value={ {
+			focus,
+			input,
 		} }>
 			{ children }
-		</PromptContext.Provider>
+		</Context.Provider>
 	)
-}
-
-export default PromptContext
+})

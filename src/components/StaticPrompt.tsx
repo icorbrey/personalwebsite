@@ -1,13 +1,7 @@
 import React from 'react'
+import { StaticPromptProps } from 'types/Props'
 
 import Prompt from 'components/Prompt'
-
-interface StaticPromptProps
-{
-	dir: string,
-	value: string,
-	success: boolean,
-}
 
 const StaticPrompt = ({ dir, success, value }: StaticPromptProps) => (
 	<span>
