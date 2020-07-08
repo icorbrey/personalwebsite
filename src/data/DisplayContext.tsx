@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react'
 
 import DisplayHistory from 'types/DisplayHistory'
+import DisplayContextState from 'data/DisplayContextState'
 import DisplayHistoryEntry from 'types/DisplayHistoryEntry'
-import DisplayContextState from 'types/DisplayContextState'
 
 import Welcome from 'components/Welcome'
 

@@ -1,7 +1,7 @@
 import React, { createRef, createContext, ReactNode, useState } from 'react'
 
 import InputRef from 'types/InputRef'
-import PromptContextState from 'types/PromptContextState'
+import PromptContextState from 'data/PromptContextState'
 
 const PromptContext = createContext<PromptContextState>({
 	ref: createRef(),

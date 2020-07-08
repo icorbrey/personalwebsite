@@ -1,4 +1,4 @@
-import InputHistoryEntry from "types/InputHistoryEntry"
+import InputHistoryEntry from 'types/InputHistoryEntry'
 
 export default interface InputContextState
 {

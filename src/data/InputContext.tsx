@@ -1,8 +1,8 @@
 import React, { createContext, ReactNode, useState } from 'react'
 
 import InputHistory from 'types/InputHistory'
-import InputHistoryEntry from "types/InputHistoryEntry"
-import InputContextState from 'types/InputContextState'
+import InputContextState from 'data/InputContextState'
+import InputHistoryEntry from 'types/InputHistoryEntry'
 
 const InputContext = createContext<InputContextState>({
 	addEntry: _ => { },
