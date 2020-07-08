@@ -1,11 +1,11 @@
 import { ReactNode } from 'react'
 import GruvboxColor from 'types/GruvboxColor'
 
-type HasChildren = {
+export type HasChildren = {
 	children?: ReactNode
 }
 
-type HasClassName = {
+export type HasClassName = {
 	className?: string
 }
 

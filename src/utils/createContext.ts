@@ -1,13 +1,9 @@
-import { Context, ReactElement, ReactNode, createContext } from 'react'
+import { Context, ReactElement, createContext } from 'react'
+import { HasChildren } from 'types/Props'
 
-type ContextPair<T> = [Context<T>, ({ children }: ContextProviderProps) => ReactElement]
+type ContextPair<T> = [Context<T>, ({ children }: HasChildren) => ReactElement]
 
-interface ContextProviderProps
-{
-	children?: ReactNode
-}
-
-type ContextProviderCreator<T> = (_Context: Context<T>) => ({ children }: ContextProviderProps) => ReactElement
+type ContextProviderCreator<T> = (_Context: Context<T>) => ({ children }: HasChildren) => ReactElement
 
 const _createContext = <T>(creator: ContextProviderCreator<T>): ContextPair<T> =>
 {
