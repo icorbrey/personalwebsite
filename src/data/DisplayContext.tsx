@@ -21,7 +21,11 @@ export const [
 
 	const History = () => (
 		<>
-			{ history.map(entry => <span>{ entry }</span>) }
+			{ history.map((entry, key) => (
+				<span { ...{ key } }>
+					{ entry }
+				</span>
+			)) }
 		</>
 	)
 
