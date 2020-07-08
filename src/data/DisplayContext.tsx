@@ -5,7 +5,7 @@ import DisplayHistoryEntry from 'types/DisplayHistoryEntry'
 
 import Welcome from 'components/Welcome'
 
-interface State
+interface DisplayState
 {
 	clearHistory: () => void
 	History: () => ReactElement
@@ -15,7 +15,7 @@ interface State
 export const [
 	DisplayContext,
 	DisplayContextProvider
-] = createContext<State>(Context => ({ children }) =>
+] = createContext<DisplayState>(Context => ({ children }) =>
 {
 	const [history, setHistory] = useState<DisplayHistory>([<Welcome />])
 
