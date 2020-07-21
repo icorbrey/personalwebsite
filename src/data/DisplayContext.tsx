@@ -1,7 +1,7 @@
-import DisplayHistory from 'types/DisplayHistory'
-import React, { useState, ReactElement } from 'react'
+import React, { ReactElement, useReducer } from 'react'
 import createStatefulContext from 'react-context-stateful'
 import DisplayHistoryEntry from 'types/DisplayHistoryEntry'
+import displayReducer, { addEntry, clearHistory } from 'data/DisplayContextReducer'
 
 import Welcome from 'components/Welcome'
 
@@ -17,7 +17,7 @@ export const [
 	DisplayContextProvider
 ] = createStatefulContext<DisplayState>(Context => ({ children }) =>
 {
-	const [history, setHistory] = useState<DisplayHistory>([<Welcome />])
+	const [history, dispatch] = useReducer(displayReducer, [<Welcome />])
 
 	const History = () => (
 		<>
@@ -29,16 +29,11 @@ export const [
 		</>
 	)
 
-	const addEntry = (entry: DisplayHistoryEntry) =>
-		setHistory([...history, entry])
-
-	const clearHistory = () => setHistory([])
-
 	return (
 		<Context.Provider value={ {
 			History,
-			addEntry,
-			clearHistory,
+			addEntry: entry => dispatch(addEntry(entry)),
+			clearHistory: () => dispatch(clearHistory()),
 		} }>
 			{ children }
 		</Context.Provider>

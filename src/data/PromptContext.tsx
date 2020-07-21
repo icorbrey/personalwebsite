@@ -1,11 +1,13 @@
 import InputRef from 'types/InputRef'
-import React, { createRef, useState } from 'react'
 import createStatefulContext from 'react-context-stateful'
+import React, { createRef, useState, Dispatch, SetStateAction } from 'react'
 
 interface PromptState
 {
 	input: InputRef
 	focus: () => void
+	success: boolean
+	setSuccess: Dispatch<SetStateAction<boolean>>
 }
 
 export const [
@@ -14,6 +16,7 @@ export const [
 ] = createStatefulContext<PromptState>(Context => ({ children }) =>
 {
 	const [input] = useState<InputRef>(createRef())
+	const [success, setSuccess] = useState(true)
 
 	const focus = () => input?.current?.focus()
 
@@ -21,6 +24,8 @@ export const [
 		<Context.Provider value={ {
 			focus,
 			input,
+			success,
+			setSuccess,
 		} }>
 			{ children }
 		</Context.Provider>

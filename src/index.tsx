@@ -7,12 +7,15 @@ import { PromptContextProvider } from 'data/PromptContext'
 import { DisplayContextProvider } from 'data/DisplayContext'
 
 import App from './components/App'
+import { CommandContextProvider } from 'data/CommandContext'
 
 ReactDOM.render(
 	<DisplayContextProvider>
 		<PromptContextProvider>
 			<InputContextProvider>
-				<App />
+				<CommandContextProvider>
+					<App />
+				</CommandContextProvider>
 			</InputContextProvider>
 		</PromptContextProvider>
 	</DisplayContextProvider>,

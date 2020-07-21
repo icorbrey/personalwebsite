@@ -3,6 +3,7 @@ import ListenerCollection from 'types/ListenerCollection'
 
 import { InputContext } from 'data/InputContext'
 import { PromptContext } from 'data/PromptContext'
+import { CommandContext } from 'data/CommandContext'
 import { DisplayContext } from 'data/DisplayContext'
 
 import Prompt from 'components/Prompt'
@@ -12,6 +13,7 @@ const InteractivePrompt = () =>
 {
 	const input = useContext(InputContext)
 	const prompt = useContext(PromptContext)
+	const command = useContext(CommandContext)
 	const display = useContext(DisplayContext)
 
 	const [value, setValue] = useState('')
@@ -24,14 +26,20 @@ const InteractivePrompt = () =>
 			'Enter': () =>
 			{
 				const value = prompt.input?.current?.value
-				if (value)
-					input.addEntry(value)
+
 				display.addEntry(<StaticPrompt { ...{
 					dir: '~',
-					success: true,
-					value: value || ''
+					value: value || '',
+					success: prompt.success,
 				} } />)
+
 				setValue('')
+
+				if (value)
+				{
+					input.addEntry(value)
+					command.execute(value)
+				}
 			},
 			'ArrowUp': () => setValue(input.getPreviousEntry()),
 			'ArrowDown': () => setValue(input.getNextEntry()),
@@ -46,7 +54,10 @@ const InteractivePrompt = () =>
 
 	return (
 		<span className='prompt-line'>
-			<Prompt dir='~' success={ true } />
+			<Prompt { ...{
+				dir: '~',
+				success: prompt.success,
+			} } />
 			<input { ...{
 				value,
 				onChange,
