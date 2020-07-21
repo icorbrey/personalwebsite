@@ -17,7 +17,7 @@ export const [
 	DisplayContextProvider
 ] = createStatefulContext<DisplayState>(Context => ({ children }) =>
 {
-	const [history, dispatch] = useReducer(displayReducer, [<Welcome />])
+	const [history, dispatch] = useReducer(displayReducer, [<Welcome />, <br />])
 
 	const History = () => (
 		<>

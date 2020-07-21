@@ -33,7 +33,6 @@ const Welcome = () => (
 			functional yet. See <Link alt='icorbrey/personalwebsite on GitHub' link='https://www.github.com/icorbrey/personalwebsite' /> for more<br />
 			details.
 		</p>
-		<br />
 	</>
 )
 
