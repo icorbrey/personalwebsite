@@ -5,15 +5,20 @@ import { PromptContext } from 'data/PromptContext'
 import { DisplayContext } from 'data/DisplayContext'
 
 import Gruvbox from 'components/Gruvbox'
+import Welcome from 'components/Welcome'
 
 interface CommandState
 {
     execute: (command: string) => void
 }
 
-interface CommandList
-{
-    [key: string]: () => void
+type Command = {
+    action: (args: string[]) => void
+    description: string
+}
+
+type CommandList = {
+    [key: string]: Command
 }
 
 export const [
@@ -25,15 +30,62 @@ export const [
     const display = useContext(DisplayContext)
 
     const commands: CommandList = {
-        'clear': () => display.clearHistory()
+        'help': {
+            action: () =>
+            {
+                const spaces = Object.keys(commands)
+                    .map(x => x.length)
+                    .reduce((x, y) => Math.max(x, y))
+
+                display.addEntry(
+                    <>
+                        <span>Available commands:</span>
+                        <br />
+                        { Object.keys(commands).map((command, key) => (
+                            <>
+                                <span { ...{ key } }>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    { command }
+                                    { ' '.repeat(spaces - command.length + 1) }
+                                    - { commands[command].description }
+                                </span>
+                                <br />
+                            </>
+                        )) }
+                    </>
+                )
+            },
+            description: 'Displays this help message.'
+        },
+        'welcome': {
+            action: () => display.addEntry(<Welcome />),
+            description: 'Display the welcome message.'
+        },
+        'clear': {
+            action: () => display.clearHistory(),
+            description: 'Clear the screen.'
+        },
+        'echo': {
+            action: args => display.addEntry(
+                <>
+                    <span>
+                        { args.join(' ') }
+                    </span>
+                    <br />
+                </>
+            ),
+            description: 'Print the given string.'
+        }
     }
 
     const execute = (command: string) =>
     {
-        if (commands[command])
+        const [name, ...args] = command.split(' ')
+
+        if (commands[name])
         {
             prompt.setSuccess(true)
-            commands[command]()
+            commands[name].action(args)
         }
         else
         {
