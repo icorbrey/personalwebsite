@@ -1,6 +1,6 @@
 import InputRef from 'types/InputRef'
-import createContext from 'utils/createContext'
 import React, { createRef, useState } from 'react'
+import createStatefulContext from 'react-context-stateful'
 
 interface PromptState
 {
@@ -11,7 +11,7 @@ interface PromptState
 export const [
 	PromptContext,
 	PromptContextProvider
-] = createContext<PromptState>(Context => ({ children }) =>
+] = createStatefulContext<PromptState>(Context => ({ children }) =>
 {
 	const [input] = useState<InputRef>(createRef())
 

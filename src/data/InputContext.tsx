@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import InputHistory from 'types/InputHistory'
-import createContext from 'utils/createContext'
 import InputHistoryEntry from 'types/InputHistoryEntry'
+import createStatefulContext from 'react-context-stateful'
 
 interface InputState
 {
@@ -13,7 +13,7 @@ interface InputState
 export const [
 	InputContext,
 	InputContextProvider
-] = createContext<InputState>(Context => ({ children }) =>
+] = createStatefulContext<InputState>(Context => ({ children }) =>
 {
 	const [index, setIndex] = useState<number>(-1)
 	const [history, setHistory] = useState<InputHistory>([])

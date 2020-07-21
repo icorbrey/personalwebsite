@@ -1,6 +1,6 @@
-import createContext from 'utils/createContext'
 import DisplayHistory from 'types/DisplayHistory'
 import React, { useState, ReactElement } from 'react'
+import createStatefulContext from 'react-context-stateful'
 import DisplayHistoryEntry from 'types/DisplayHistoryEntry'
 
 import Welcome from 'components/Welcome'
@@ -15,7 +15,7 @@ interface DisplayState
 export const [
 	DisplayContext,
 	DisplayContextProvider
-] = createContext<DisplayState>(Context => ({ children }) =>
+] = createStatefulContext<DisplayState>(Context => ({ children }) =>
 {
 	const [history, setHistory] = useState<DisplayHistory>([<Welcome />])
 
