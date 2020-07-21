@@ -30,7 +30,7 @@ const Welcome = () => (
 		<br />
 		<p>
 			Please note that this site is still under construction, and may not be fully<br />
-			functional yet.See <Link alt='icorbrey/personalwebsite on GitHub' link='https://www.github.com/icorbrey/personalwebsite' /> for more<br />
+			functional yet. See <Link alt='icorbrey/personalwebsite on GitHub' link='https://www.github.com/icorbrey/personalwebsite' /> for more<br />
 			details.
 		</p>
 		<br />
