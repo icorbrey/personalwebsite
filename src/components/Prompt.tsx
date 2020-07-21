@@ -1,14 +1,9 @@
 import React from 'react'
+import { PromptProps } from 'types/Props'
 
-import Gruvbox from './Gruvbox'
+import Gruvbox from 'components/Gruvbox'
 
-interface PromptProps
-{
-	dir: string,
-	success: boolean,
-}
-
-export default ({ success, dir }: PromptProps) => (
+const Prompt = ({ success, dir }: PromptProps) => (
 	<span>
 		<Gruvbox fg={ success ? 'green' : 'red' }>
 			corbrey
@@ -20,3 +15,5 @@ export default ({ success, dir }: PromptProps) => (
 		&nbsp;
 	</span>
 )
+
+export default Prompt

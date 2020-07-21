@@ -1,13 +1,10 @@
 import React from 'react'
+import { LinkProps } from 'types/Props'
 
-interface LinkProps
-{
-	alt: string
-	link: string
-}
-
-export default ({ link, alt }: LinkProps) => (
+const Link = ({ link, alt }: LinkProps) => (
 	<a href={ link } title={ alt }>
 		{ link }
 	</a>
 )
+
+export default Link

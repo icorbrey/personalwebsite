@@ -1,20 +1,13 @@
-import React, { ReactNode } from 'react'
-import GruvboxColor from '../types/GruvboxColor'
+import React from 'react'
+import { GruvboxProps } from 'types/Props'
+import GruvboxColor from 'types/GruvboxColor'
 
-interface GruvboxProps
+const Gruvbox = ({ fg, bg, className: inputClassName, children }: GruvboxProps) =>
 {
-	bg?: GruvboxColor
-	fg?: GruvboxColor
-	children?: ReactNode
-	className?: string
-}
-
-export default ({ fg, bg, className, children }: GruvboxProps) =>
-{
-	const classes = getClassNames(fg, bg, className)
+	const className = getClassNames(fg, bg, inputClassName)
 
 	return (
-		<span className={ classes }>
+		<span { ...{ className } }>
 			{ children }
 		</span>
 	)
@@ -30,3 +23,5 @@ const toForeground = (color: GruvboxColor | undefined): string | undefined =>
 
 const toBackground = (color: GruvboxColor | undefined): string | undefined =>
 	color && `gruvbox-bg-${ color }`
+
+export default Gruvbox

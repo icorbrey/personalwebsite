@@ -55,6 +55,7 @@ a
 
 	.prompt-input
 	{
+		@extend .gruvbox-foreground;
 		@extend .gruvbox-bg-background;
 		@extend .term-text;
 	
@@ -62,6 +63,5 @@ a
 		margin: 0;
 		padding: 0;
 		border: none;
-		color: gruvbox.$foreground;
 	}
 }

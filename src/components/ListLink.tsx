@@ -1,18 +1,14 @@
 import React from 'react'
-import Link from './Link'
+import { ListLinkProps } from 'types/Props'
 
-interface ListLinkProps
-{
-	alt: string
-	link: string
-	label: string
-	spaces: number
-}
+import Link from 'components/Link'
 
-export default ({ label, alt, link, spaces = 0 }: ListLinkProps) => (
+const ListLink = ({ label, alt, link, spaces = 0 }: ListLinkProps) => (
 	<span>
-		&nbsp;* { label }:{ ' '.repeat(spaces) }
+		&nbsp;* {label }:{' '.repeat(spaces) }
 		<Link { ...{ alt, link } } />
 		<br />
 	</span>
 )
+
+export default ListLink
